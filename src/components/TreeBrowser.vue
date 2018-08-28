@@ -12,9 +12,13 @@
         {{expand ? '&#9660;' : '&#9658;'}}
       </span>
 
-      <span v-else>&#9671;</span>
+      <span class="type" v-else>&#9671;</span>
 
-      {{node.name}}
+      <span 
+        :style="getStyle(node)"
+      >
+        {{node.name}}
+      </span>
     </div>
     
     <TreeBrowser
@@ -29,6 +33,10 @@
 </template>
 
 <script>
+import * as ColorHash from 'color-hash'
+
+const colorHash = new ColorHash()
+
 export default {
   data() {
     return {
@@ -55,6 +63,17 @@ export default {
       if (!this.hasChildren) {
         this.$emit('onClick', this.node)
       }
+    },
+    getStyle(node) {
+      if (node.children) {
+        return {
+          'color': 'white',
+        }
+      } else {
+        return {
+          'color': colorHash.hex(node.name.split('.')[1])
+        }
+      }
     }
   }
 }
@@ -64,5 +83,9 @@ export default {
 .node-names {
   font-size: 20px;
   text-align: left;
+}
+
+.type {
+  margin-left: 10px;
 }
 </style>

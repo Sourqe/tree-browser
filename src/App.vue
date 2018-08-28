@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Tree Browser in Vue</h1>
     <TreeBrowser 
       :node="node"
       @onClick="nodeClicked"
@@ -9,7 +10,7 @@
 
 <script>
 import TreeBrowser from './components/TreeBrowser.vue'
-import root from './root.json'
+import node from './root.json'
 
 export default {
   name: 'app',
@@ -23,7 +24,7 @@ export default {
   },
   data() {
     return {
-      root,
+      node,
     }
   }
 }
@@ -35,7 +36,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  background-color: black;
+  color: white;
 }
 </style>
