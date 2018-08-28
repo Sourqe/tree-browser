@@ -2,41 +2,28 @@
   <div id="app">
     <TreeBrowser 
       :node="node"
+      @onClick="nodeClicked"
     />
   </div>
 </template>
 
 <script>
 import TreeBrowser from './components/TreeBrowser.vue'
+import root from './root.json'
 
 export default {
   name: 'app',
   components: {
     TreeBrowser
   },
+  methods: {
+    nodeClicked() {
+      alert(node.name)
+    }
+  },
   data() {
     return {
-      node: {
-        name: '/',
-        children: [
-          {
-            name: 'music',
-            children: [
-              {
-                name: 'mp3'
-              }
-            ]
-          },
-          {
-            name: 'workspace', 
-            children: [
-              {
-                name: 'source.js'
-              }
-            ]
-          }
-        ]
-      }
+      root,
     }
   }
 }

@@ -3,7 +3,7 @@
     <div 
       class="node-names"
       :style="{'margin-left': `${depth * 20}px`}"
-      @click="expand = !expand"
+      @click="nodeClick()"
     >
       <span 
         v-if="hasChildren"
@@ -13,6 +13,7 @@
       </span>
 
       <span v-else>&#9671;</span>
+
       {{node.name}}
     </div>
     
@@ -21,6 +22,7 @@
       v-for="child in node.children"
       :key="child.name"
       :node="child"
+      @onClick="(node) => $emit('onClick', node)"
       :depth="depth + 1" 
     />
   </div>
@@ -44,6 +46,15 @@ export default {
   computed: {
     hasChildren() {
       return this.node.children
+    }
+  },
+  methods: {
+    nodeClick() {
+      this.expand = !this.expand
+
+      if (!this.hasChildren) {
+        this.$emit('onClick', this.node)
+      }
     }
   }
 }
