@@ -1,17 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TreeBrowser 
+      :node="node"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TreeBrowser from './components/TreeBrowser.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    TreeBrowser
+  },
+  data() {
+    return {
+      node: {
+        name: '/',
+        children: [
+          {
+            name: 'music',
+            children: [
+              {
+                name: 'mp3'
+              }
+            ]
+          },
+          {
+            name: 'workspace', 
+            children: [
+              {
+                name: 'source.js'
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 }
 </script>
