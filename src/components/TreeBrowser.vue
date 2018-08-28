@@ -5,6 +5,14 @@
       :style="{'margin-left': `${depth * 20}px`}"
       @click="expand = !expand"
     >
+      <span 
+        v-if="hasChildren"
+        class="type"
+      >
+        {{expand ? '&#9660;' : '&#9658;'}}
+      </span>
+
+      <span v-else>&#9671;</span>
       {{node.name}}
     </div>
     
@@ -33,6 +41,11 @@ export default {
     node: Object,
   },
   name: 'TreeBrowser',
+  computed: {
+    hasChildren() {
+      return this.node.children
+    }
+  }
 }
 </script>
 
